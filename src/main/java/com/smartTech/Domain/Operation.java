@@ -1,17 +1,34 @@
 package com.smartTech.Domain;
 
-public class Operation {
+import com.sun.istack.NotNull;
 
+import javax.persistence.*;
+import java.io.Serializable;
 
-    private Integer operationId;
-    private Integer categoryId;
-    private Integer userId;
+@Entity
+public class Operation implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="operationId")
+    private Long operationId;
+
+    private Long categoryId;
+    private Long userId;
+
+    @NotNull
+    @Column(name="price", nullable = false)
     private Double price;
+
+    @NotNull
+    @Column(name="rate", nullable = false)
     private String rate;
 
     private Long operationDate;
 
-    public Operation(Integer operationId, Integer categoryId, Integer userId, Double price, String rate, Long operationDate) {
+
+
+    public Operation(Long operationId, Long categoryId, Long userId, Double price, String rate, Long operationDate) {
         this.operationId = operationId;
         this.categoryId = categoryId;
         this.userId = userId;
@@ -20,27 +37,31 @@ public class Operation {
         this.operationDate = operationDate;
     }
 
-    public Integer getOperationId() {
+    public Operation() {
+
+    }
+
+    public Long getOperationId() {
         return operationId;
     }
 
-    public void setOperationId(Integer operationId) {
+    public void setOperationId(Long operationId) {
         this.operationId = operationId;
     }
 
-    public Integer getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -66,5 +87,17 @@ public class Operation {
 
     public void setOperationDate(Long operationDate) {
         this.operationDate = operationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Operation{" +
+                "operationId=" + operationId +
+                ", categoryId=" + categoryId +
+                ", userId=" + userId +
+                ", price=" + price +
+                ", rate='" + rate + '\'' +
+                ", operationDate=" + operationDate +
+                '}';
     }
 }

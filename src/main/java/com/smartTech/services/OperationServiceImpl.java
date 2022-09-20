@@ -12,32 +12,39 @@ import java.util.List;
 @Service
 @Transactional
 public class OperationServiceImpl implements OperationService {
- @Autowired
- OperationRopository operationRopository;
-    @Override
-    public List<Operation> fetchAllOperation(Integer userId, Integer categoryId) {
-        return operationRopository.findAll(userId,categoryId);
+
+ private final OperationRopository operationRopository;
+
+
+@Autowired
+    public OperationServiceImpl(OperationRopository operationRopository) {
+        this.operationRopository = operationRopository;
     }
 
     @Override
-    public Operation fetchAllOperationById(Integer userId, Integer categoryId, Integer operationId) throws EtResourceNotFoundException {
-        return operationRopository.findById(userId,categoryId,operationId);
+    public List<Operation> fetchAllOperation(Long userId, Long postId) {
+        return operationRopository.findAll(userId,postId);
     }
 
     @Override
-    public Operation addOperation(Integer userId, Integer categoryId, Integer operationId, Double price, String rate, Long operationDate) throws EtBadRequestException {
-       operationId = operationRopository.create(userId,categoryId,price,rate,operationDate);
-        return operationRopository.findById(userId,categoryId,operationId);
+    public Operation fetchAllOperationById(Long  userId, Long  postId, Long  operationId) throws EtResourceNotFoundException {
+        return operationRopository.findById(userId,postId,operationId);
     }
 
     @Override
-    public void updateOperation(Integer userId, Integer categoryId, Integer operationId, Operation operation) throws EtBadRequestException{
-    operationRopository.update(userId,categoryId,operationId,operation);
+    public Operation addOperation(Long  userId, Long postId, Long  operationId, Double price, String rate, Long operationDate) throws EtBadRequestException {
+       operationId = operationRopository.create(userId,postId,price,rate,operationDate);
+        return operationRopository.findById(userId,postId,operationId);
     }
 
     @Override
-    public void removeOperation(Integer userId, Integer categoryId, Integer operationId) throws EtResourceNotFoundException {
-      operationRopository.removeById(userId,categoryId,operationId);
+    public void updateOperation(Long  userId,Long postId, Long  operationId, Operation operation) throws EtBadRequestException{
+    operationRopository.update(userId,postId,operationId,operation);
+    }
+
+    @Override
+    public void removeOperation(Long  userId, Long  postId, Long  operationId) throws EtResourceNotFoundException {
+      operationRopository.removeById(userId,postId,operationId);
 
     }
 }

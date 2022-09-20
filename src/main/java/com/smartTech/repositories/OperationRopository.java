@@ -3,20 +3,26 @@ package com.smartTech.repositories;
 import com.smartTech.Domain.Operation;
 import com.smartTech.exeception.EtBadRequestException;
 import com.smartTech.exeception.EtResourceNotFoundException;
-
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
-public interface OperationRopository {
 
-    List<Operation> findAll(Integer userId, Integer categoryId);
+@Repository
+public interface OperationRopository  extends JpaRepository<Operation,Long> {
 
-    Operation findById(Integer userId, Integer categoryId, Integer operationId) throws EtResourceNotFoundException;
+    List<Operation> findAll(Long userId, Long postId);
 
-    Integer create(Integer userId, Integer categoryId, Double price, String rate, Long operationDate) throws EtBadRequestException;
+    Operation findById(Long userId,Long postId, Long operationId) throws EtResourceNotFoundException;
 
-    void update(Integer userId, Integer categoryId, Integer transactionId, Operation  transaction) throws EtBadRequestException;
+Long create(Long userId, Long categoryId, Double price, String rate, Long operationDate) throws EtBadRequestException;
 
-    void removeById(Integer userId, Integer categoryId, Integer operationId) throws EtResourceNotFoundException;
+    void update(Long userId, Long postId, Long  operationId, Operation  operation) throws EtBadRequestException;
+
+    void removeById(Long userId, Long postId, Long  operationId) throws EtResourceNotFoundException;
+
+    Optional<Operation> findByName(String Name);
 
 }
 
