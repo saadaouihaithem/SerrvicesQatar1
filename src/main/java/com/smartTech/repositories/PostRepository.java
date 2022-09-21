@@ -8,8 +8,9 @@ import com.smartTech.exeception.EtBadRequestException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-     public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PostRepository extends JpaRepository<Post, Long> {
 
         List<Post>findAll(Long userId) throws EtResourceNotFoundException;
 
@@ -20,5 +21,7 @@ import java.util.List;
         void update(Long userId, Long postId, Post category) throws EtBadRequestException;
 
         void removeById(Long userId, Long postId);
-    }
+
+         Optional<Post> findById(Long postId);
+     }
 

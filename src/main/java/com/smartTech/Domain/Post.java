@@ -36,7 +36,9 @@ public class Post {
     private String city;
     private Double price;
     private String type;
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+
     private Set<Comment> comments = new HashSet<>();
     public Post(long postId, long userId, String title, String description, double price) {
     }
@@ -61,9 +63,6 @@ public class Post {
     public Post() {
 
     }
-
-
-
 
     public Long getPostId() {
         return postId;
@@ -116,13 +115,6 @@ public class Post {
     public Integer getContact() {
         return contact;
     }
-
-
-
-
-
-
-
 
     public void setContact(Integer contact) {
         this.contact = contact;

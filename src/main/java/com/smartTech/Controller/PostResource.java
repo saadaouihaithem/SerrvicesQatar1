@@ -15,20 +15,21 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/Post")
-public class CategoryResource {
+@RequestMapping("/Posts")
+public class PostResource {
 
 
    private final PostService postService;
   @Autowired
-    public CategoryResource( PostService postService) {
+    public PostResource(PostService postService) {
       this.postService = postService;
     }
 
     @GetMapping("")
     public ResponseEntity<List<Post>> getAllPost(HttpServletRequest request) {
     Long  userId = (Long) request.getAttribute("userId");
-        List<Post> post = postService.fetchAllPost(userId);
+        Long  postId = (Long) request.getAttribute("postId");
+        List<Post> post = postService.fetchPostById(postId,userId);
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 

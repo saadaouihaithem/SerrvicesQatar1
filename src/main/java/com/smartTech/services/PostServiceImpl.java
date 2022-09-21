@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 
@@ -23,15 +25,13 @@ public class PostServiceImpl implements PostService {
     }*/
 
     @Override
-    public Post findById(Long userId, Long postId) throws EtResourceNotFoundException {
-        return postRepository.findById(userId,postId);
+    public List<Post> fetchPostById(Long postId, Long userId) {
+        return null;
     }
 
-    @Override
-    public Post fetchPostById(Long  userId, Long  postId) throws EtResourceNotFoundException {
-        return postRepository.findById(userId,postId);
+    public Optional<Post> findPostById(Long postId) throws EtResourceNotFoundException {
+        return postRepository.findById(postId);
     }
-
 
     public Post addPost(Long  userId, Long postId,String title, String description) throws EtBadRequestException {
      Integer post= postRepository.create(userId, title, description);

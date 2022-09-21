@@ -13,14 +13,15 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Long create( String Name, String Email, String Password);
 
-    Optional<User> findByUsernameAndEmail( String email ,String password) throws EtAuthException;
+    User findByUsernameAndEmail( String email ,String password) throws EtAuthException;
 
     Integer getCountByEmail(String email);
 
-
     Optional<User> findByEmail(String email);
 
-    Optional<User> findByUsername(String username);
-
     Boolean existsByEmail(String email);
+
+    User findUserById(Long userId);
+
+    void deleteuserById(Long userId);
 }

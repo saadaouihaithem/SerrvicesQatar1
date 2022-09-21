@@ -20,7 +20,7 @@ import java.util.Map;
 public class OperationResource{
 
    private final OperationService operationService;
-  @Autowired
+
     public OperationResource(OperationService operationService) {
         this.operationService = operationService;
     }

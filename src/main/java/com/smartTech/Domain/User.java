@@ -20,7 +20,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = -8080540494839892473L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "userid")
+    @Column(name = "userId")
     private Long userId;
     @NotNull
     @Column(name="Name", nullable = false)
@@ -33,7 +33,7 @@ public class User implements Serializable {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "Uer",
+    @JoinTable(name = "User",
             joinColumns = {
                     @JoinColumn(name = "userId")},
             inverseJoinColumns = {
@@ -53,12 +53,6 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
     }
-
-
-
-
-
-
 
 
     public Long getUserId() {
